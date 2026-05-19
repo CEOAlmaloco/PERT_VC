@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 220" font-family="system-ui,sans-serif">
+  <rect width="480" height="220" fill="#f8fafc"/>
+  <text x="240" y="22" text-anchor="middle" font-size="13" font-weight="700" fill="#0f2744">Costos fijos vs variables</text>
+  <rect x="24" y="44" width="200" height="140" rx="8" fill="#dbeafe" stroke="#2563eb"/>
+  <text x="124" y="68" text-anchor="middle" font-size="12" font-weight="700" fill="#1e40af">FIJOS</text>
+  <text x="36" y="92" font-size="10" fill="#334155">" Sueldos / honorarios</text>
+  <text x="36" y="110" font-size="10" fill="#334155">" Arriendo</text>
+  <text x="36" y="128" font-size="10" fill="#334155">" Cloud base mensual</text>
+  <text x="36" y="146" font-size="10" fill="#334155">" Licencias</text>
+  <text x="36" y="168" font-size="9" fill="#64748b">No dependen de # alertas</text>
+  <rect x="256" y="44" width="200" height="140" rx="8" fill="#ffedd5" stroke="#ea580c"/>
+  <text x="356" y="68" text-anchor="middle" font-size="12" font-weight="700" fill="#c2410c">VARIABLES</text>
+  <text x="268" y="92" font-size="10" fill="#334155">" SMS por emergencia</text>
+  <text x="268" y="110" font-size="10" fill="#334155">" APIs / GB GIS</text>
+  <text x="268" y="128" font-size="10" fill="#334155">" Horas extra verano</text>
+  <text x="268" y="146" font-size="10" fill="#334155">CVT = CVU × Q</text>
+  <text x="240" y="206" text-anchor="middle" font-size="10" fill="#475569">SIGPI: más incidentes ’ suben variables, no necesariamente fijos</text>
+</svg>

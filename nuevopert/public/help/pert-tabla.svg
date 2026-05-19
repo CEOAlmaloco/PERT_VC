@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 200" font-family="system-ui,sans-serif">
+  <rect width="480" height="200" fill="#f8fafc"/>
+  <text x="240" y="22" text-anchor="middle" font-size="13" font-weight="700" fill="#0f2744">Tabla PERT  columnas clave</text>
+  <rect x="16" y="36" width="448" height="28" fill="#e2e8f0"/>
+  <text x="40" y="54" font-size="10" font-weight="600" fill="#334155">Act.</text>
+  <text x="90" y="54" font-size="10" font-weight="600" fill="#334155">Proc.</text>
+  <text x="150" y="54" font-size="10" font-weight="600" fill="#334155">a</text>
+  <text x="190" y="54" font-size="10" font-weight="600" fill="#334155">m</text>
+  <text x="230" y="54" font-size="10" font-weight="600" fill="#334155">b</text>
+  <text x="280" y="54" font-size="10" font-weight="600" fill="#b45309">Te</text>
+  <text x="330" y="54" font-size="10" font-weight="600" fill="#334155">Ã²</text>
+  <rect x="16" y="64" width="448" height="32" fill="#fff" stroke="#cbd5e1"/>
+  <text x="40" y="84" font-size="11" fill="#0f2744">A</text>
+  <text x="90" y="84" font-size="11" fill="#64748b">-</text>
+  <text x="150" y="84" font-size="11" fill="#334155">2</text>
+  <text x="190" y="84" font-size="11" fill="#334155">4</text>
+  <text x="230" y="84" font-size="11" fill="#334155">6</text>
+  <text x="280" y="84" font-size="11" font-weight="700" fill="#b45309">4.0</text>
+  <rect x="16" y="100" width="448" height="32" fill="#fff" stroke="#cbd5e1"/>
+  <text x="40" y="120" font-size="11" fill="#0f2744">D</text>
+  <text x="90" y="120" font-size="11" fill="#64748b">A;B;C</text>
+  <text x="150" y="120" font-size="11" fill="#334155">5</text>
+  <text x="190" y="120" font-size="11" fill="#334155">8</text>
+  <text x="230" y="120" font-size="11" fill="#334155">11</text>
+  <text x="280" y="120" font-size="11" font-weight="700" fill="#b45309">8.0</text>
+  <text x="16" y="168" font-size="11" fill="#475569">Te = (a + 4m + b) / 6  ’  pulse ACTUALIZAR para ver la red</text>
+</svg>

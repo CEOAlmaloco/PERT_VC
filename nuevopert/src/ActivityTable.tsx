@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react"
-import type { Row } from "./cpmEngine"
+import { HelpButton, LabelWithHelp } from "./report/ContextHelp"
+import { previewPertFromRow, type Row } from "./cpmEngine"
 
 type Props = {
   rows: Row[]
@@ -9,7 +10,6 @@ type Props = {
 const phAct = "ej. A"
 const phNom = "ej. Comprar ingredientes"
 const phProc = "-  o  A;B"
-const phDur = "6"
 
 export function ActivityTable({ rows, onChange }: Props) {
   const update = (id: string, field: keyof Omit<Row, "id">, value: string) => {
@@ -18,7 +18,10 @@ export function ActivityTable({ rows, onChange }: Props) {
 
   const addRow = () => {
     const id = String(Date.now())
-    onChange([...rows, { id, actividad: "", nombre: "", procedencia: "", duracion: "" }])
+    onChange([
+      ...rows,
+      { id, actividad: "", nombre: "", procedencia: "", optimista: "", probable: "", pesimista: "" },
+    ])
   }
 
   const removeRow = (id: string) => {
@@ -28,69 +31,104 @@ export function ActivityTable({ rows, onChange }: Props) {
 
   return (
     <section>
-      <h2 style={{ fontSize: 15, margin: "0 0 8px", fontWeight: 600 }}>Tabla (editable)</h2>
+      <h2 style={{ fontSize: 15, margin: "0 0 8px", fontWeight: 600, display: "flex", alignItems: "center", gap: 8 }}>
+        Tabla (editable)
+        <HelpButton topicId="pert-overview" />
+      </h2>
       <p style={{ margin: "0 0 8px", fontSize: 12, color: "#444" }}>
-        <strong>Actividad</strong> = código único (clave). <strong>Nombre</strong> = descripción.{" "}
-        <strong>Procedencia</strong> = códigos que deben terminar antes (separar con <code>;</code> o <code>,</code>).{" "}
-        <strong>Duración</strong> = semanas (número; admite texto tipo «8 sem»).
+        <LabelWithHelp topicId="pert-formula-te">
+          <strong>a, m, b</strong>
+        </LabelWithHelp>{" "}
+        = optimista, probable, pesimista (sem). <strong>Te</strong> = (a+4m+b)/6 alimenta el CPM.{" "}
+        <LabelWithHelp topicId="pert-procedencia">
+          <strong>Procedencia</strong>
+        </LabelWithHelp>{" "}
+        = predecesores (<code>;</code> o <code>,</code>).
       </p>
       <div style={{ overflowX: "auto", border: "1px solid #111" }}>
         <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
           <thead>
             <tr style={{ background: "#f5f5f5" }}>
-              <th style={{ ...th, minWidth: 72 }}>Actividad</th>
-              <th style={{ ...th, minWidth: 160 }}>Nombre</th>
-              <th style={{ ...th, minWidth: 100 }}>Procedencia</th>
-              <th style={{ ...th, minWidth: 88 }}>Duración (sem)</th>
-              <th style={{ ...th, width: 52 }} />
+              <th style={{ ...th, minWidth: 56 }}>Act.</th>
+              <th style={{ ...th, minWidth: 120 }}>Nombre</th>
+              <th style={{ ...th, minWidth: 88 }}>Proc.</th>
+              <th style={{ ...th, minWidth: 52 }}>a</th>
+              <th style={{ ...th, minWidth: 52 }}>m</th>
+              <th style={{ ...th, minWidth: 52 }}>b</th>
+              <th style={{ ...th, minWidth: 52 }}>Te</th>
+              <th style={{ ...th, minWidth: 52 }}>σ²</th>
+              <th style={{ ...th, width: 44 }} />
             </tr>
           </thead>
           <tbody>
-            {rows.map((r) => (
-              <tr key={r.id}>
-                <td style={td}>
-                  <input
-                    style={inp}
-                    value={r.actividad}
-                    placeholder={phAct}
-                    onChange={(e) => update(r.id, "actividad", e.target.value)}
-                    aria-label="Actividad"
-                  />
-                </td>
-                <td style={td}>
-                  <input
-                    style={inp}
-                    value={r.nombre}
-                    placeholder={phNom}
-                    onChange={(e) => update(r.id, "nombre", e.target.value)}
-                    aria-label="Nombre"
-                  />
-                </td>
-                <td style={td}>
-                  <input
-                    style={inp}
-                    value={r.procedencia}
-                    placeholder={phProc}
-                    onChange={(e) => update(r.id, "procedencia", e.target.value)}
-                    aria-label="Procedencia"
-                  />
-                </td>
-                <td style={td}>
-                  <input
-                    style={inp}
-                    value={r.duracion}
-                    placeholder={phDur}
-                    onChange={(e) => update(r.id, "duracion", e.target.value)}
-                    aria-label="Duración en semanas"
-                  />
-                </td>
-                <td style={td}>
-                  <button type="button" style={btn} onClick={() => removeRow(r.id)}>
-                    ✕
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {rows.map((r) => {
+              const prev = previewPertFromRow(r)
+              return (
+                <tr key={r.id}>
+                  <td style={td}>
+                    <input
+                      style={inp}
+                      value={r.actividad}
+                      placeholder={phAct}
+                      onChange={(e) => update(r.id, "actividad", e.target.value)}
+                      aria-label="Actividad"
+                    />
+                  </td>
+                  <td style={td}>
+                    <input
+                      style={inp}
+                      value={r.nombre}
+                      placeholder={phNom}
+                      onChange={(e) => update(r.id, "nombre", e.target.value)}
+                      aria-label="Nombre"
+                    />
+                  </td>
+                  <td style={td}>
+                    <input
+                      style={inp}
+                      value={r.procedencia}
+                      placeholder={phProc}
+                      onChange={(e) => update(r.id, "procedencia", e.target.value)}
+                      aria-label="Procedencia"
+                    />
+                  </td>
+                  <td style={td}>
+                    <input
+                      style={inp}
+                      value={r.optimista}
+                      placeholder="a"
+                      onChange={(e) => update(r.id, "optimista", e.target.value)}
+                      aria-label="Tiempo optimista"
+                    />
+                  </td>
+                  <td style={td}>
+                    <input
+                      style={inp}
+                      value={r.probable}
+                      placeholder="m"
+                      onChange={(e) => update(r.id, "probable", e.target.value)}
+                      aria-label="Tiempo probable"
+                    />
+                  </td>
+                  <td style={td}>
+                    <input
+                      style={inp}
+                      value={r.pesimista}
+                      placeholder="b"
+                      onChange={(e) => update(r.id, "pesimista", e.target.value)}
+                      aria-label="Tiempo pesimista"
+                    />
+                  </td>
+                  <td style={tdCalc}>{prev ? prev.te.toFixed(2) : "—"}</td>
+                  <td style={tdCalc}>{prev ? prev.variance.toFixed(2) : "—"}</td>
+                  <td style={td}>
+                    <button type="button" style={btn} onClick={() => removeRow(r.id)}>
+                      ✕
+                    </button>
+                  </td>
+                </tr>
+              )
+            })}
           </tbody>
         </table>
       </div>
@@ -103,10 +141,10 @@ export function ActivityTable({ rows, onChange }: Props) {
 
 const th: CSSProperties = {
   textAlign: "left",
-  padding: "8px 10px",
+  padding: "8px 8px",
   borderBottom: "1px solid #111",
   fontWeight: 600,
-  fontSize: 12,
+  fontSize: 11,
 }
 
 const td: CSSProperties = {
@@ -115,10 +153,19 @@ const td: CSSProperties = {
   verticalAlign: "middle",
 }
 
+const tdCalc: CSSProperties = {
+  ...td,
+  padding: "8px 8px",
+  fontFamily: "ui-monospace, monospace",
+  fontSize: 12,
+  color: "#333",
+  background: "#fafafa",
+}
+
 const inp: CSSProperties = {
   width: "100%",
   border: "none",
-  padding: "10px 10px",
+  padding: "8px 8px",
   fontSize: 13,
   fontFamily: "inherit",
   background: "#fff",

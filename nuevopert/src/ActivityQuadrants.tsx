@@ -1,4 +1,5 @@
 import type { CpmResult } from "./cpmEngine"
+import { formatSem } from "./formatSem"
 
 type Props = {
   result: CpmResult
@@ -60,7 +61,7 @@ export function ActivityQuadrants({ result }: Props) {
                   color: crit ? "#b91c1c" : "#444",
                 }}
               >
-                Holgura {slack.toFixed(0)} sem
+                Holgura {formatSem(slack)} sem
               </div>
             </div>
           )
@@ -74,7 +75,7 @@ function Q({ label, v }: { label: string; v: number }) {
   return (
     <div style={{ borderRight: "1px solid #ddd", borderBottom: "1px solid #ddd", padding: "6px 4px", textAlign: "center" }}>
       <div style={{ fontSize: 9, color: "#666" }}>{label}</div>
-      <div style={{ fontFamily: "ui-monospace, monospace", fontWeight: 600 }}>{Number.isFinite(v) ? v.toFixed(0) : "—"}</div>
+      <div style={{ fontFamily: "ui-monospace, monospace", fontWeight: 600 }}>{Number.isFinite(v) ? formatSem(v) : "—"}</div>
     </div>
   )
 }

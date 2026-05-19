@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 200" font-family="system-ui,sans-serif">
+  <rect width="480" height="200" fill="#f8fafc"/>
+  <text x="240" y="22" text-anchor="middle" font-size="13" font-weight="700" fill="#0f2744">De resultado a flujo de caja</text>
+  <rect x="40" y="40" width="90" height="36" rx="6" fill="#dcfce7" stroke="#16a34a"/>
+  <text x="85" y="62" text-anchor="middle" font-size="10" font-weight="600">Ingresos</text>
+  <text x="140" y="62" font-size="14"></text>
+  <rect x="155" y="40" width="90" height="36" rx="6" fill="#fee2e2" stroke="#dc2626"/>
+  <text x="200" y="62" text-anchor="middle" font-size="10" font-weight="600">Costos</text>
+  <text x="255" y="62" font-size="14">=</text>
+  <rect x="270" y="40" width="100" height="36" rx="6" fill="#e0e7ff" stroke="#4f46e5"/>
+  <text x="320" y="62" text-anchor="middle" font-size="10" font-weight="600">BAI / UAI</text>
+  <path d="M320 82 L320 100" stroke="#94a3b8" stroke-width="2"/>
+  <text x="320" y="118" text-anchor="middle" font-size="9" fill="#64748b">+ GND (deprec.)</text>
+  <text x="320" y="132" text-anchor="middle" font-size="9" fill="#64748b">+ Inversión P0</text>
+  <text x="320" y="146" text-anchor="middle" font-size="9" fill="#64748b">+ Préstamo / cuotas</text>
+  <rect x="200" y="158" width="240" height="32" rx="6" fill="#0f2744"/>
+  <text x="320" y="178" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">FLUJO DE CAJA (dinero real)</text>
+</svg>

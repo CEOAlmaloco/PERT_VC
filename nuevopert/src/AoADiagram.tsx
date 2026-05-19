@@ -1,9 +1,11 @@
 import type { CpmResult } from "./cpmEngine"
-import { AO_A8_EVENT_POS, AO_A8_SEGMENTS, computeAoA8EventTimes } from "./classicAoA8"
 import { formatSem } from "./formatSem"
+import type { AoASegment, AoATopology } from "./sigpiAoA"
+import { computeAoAEventTimes } from "./sigpiAoA"
 
 type Props = {
   result: CpmResult
+  topology: AoATopology
 }
 
 const EVT_R = 22
@@ -48,25 +50,29 @@ function isCritAct(result: CpmResult, code: string): boolean {
   return Math.abs(result.slack[code] ?? 1) < 1e-6
 }
 
-/** Actividad-en-flecha (AoA): eventos 1…8, ficticias discontinuas, actividades reales con duración de la tabla. */
-export function ClassicAoA8Diagram({ result }: Props) {
+/** Diagrama AoA: círculos = eventos, flechas = actividades, ficticias punteadas. */
+export function AoADiagram({ result, topology }: Props) {
   const pad = 36
-  const Te = computeAoA8EventTimes(result)
+  const segments = topology.segments
+  const Te = computeAoAEventTimes(result, segments)
   const dur = Object.fromEntries(result.activities.map((a) => [a.code, a.duration]))
+  const maxEv = topology.eventCount
 
   const pt = (n: number) => {
-    const p = AO_A8_EVENT_POS[n]!
+    const p = topology.eventPos[n] ?? { x: 80 + n * 100, y: 240 }
     return { x: p.x + pad, y: p.y + pad }
   }
 
-  const w = 980 + pad * 2
-  const h = 460 + pad * 2
+  const xs = Object.values(topology.eventPos).map((p) => p.x)
+  const ys = Object.values(topology.eventPos).map((p) => p.y)
+  const w = Math.max(...xs, 900) + pad * 2 + 80
+  const h = Math.max(...ys, 400) + pad * 2 + 80
 
   return (
     <svg
       viewBox={`0 0 ${w} ${h}`}
       role="img"
-      aria-label="Diagrama AoA eventos 1 a 8"
+      aria-label={topology.title}
       style={{
         width: "100%",
         maxWidth: w,
@@ -77,30 +83,32 @@ export function ClassicAoA8Diagram({ result }: Props) {
       }}
     >
       <defs>
-        <marker id="aoa8-norm" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+        <marker id="aoa-norm" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
           <path d="M0,0 L9,4.5 L0,9 Z" fill={NORM} />
         </marker>
-        <marker id="aoa8-crit" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+        <marker id="aoa-crit" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
           <path d="M0,0 L9,4.5 L0,9 Z" fill={CRIT} />
         </marker>
       </defs>
 
       <text x={pad} y={26} fontSize={12} fill="#404040" fontFamily="system-ui, Segoe UI, sans-serif">
-        <tspan fontWeight={600}>Actividad en flecha (AoA)</tspan>
-        <tspan fill="#64748b"> · ficticia = discontinua (0 sem)</tspan>
-        <tspan> · número en círculo = evento · debajo = tiempo temprano (sem)</tspan>
+        <tspan fontWeight={600}>{topology.title}</tspan>
+        <tspan fill="#64748b"> · ○ = evento · → = actividad (A, B, C…) · - - - = ficticia (0 sem)</tspan>
       </text>
 
-      {AO_A8_SEGMENTS.filter((s) => s.kind === "dummy").map((s, idx) => {
+      {segments.filter((s): s is Extract<AoASegment, { kind: "dummy" }> => s.kind === "dummy").map((s, idx) => {
         const p1 = pt(s.from)
         const p2 = pt(s.to)
         const mx = (p1.x + p2.x) / 2
         const my = (p1.y + p2.y) / 2
-        const bend = s.from === 2 && s.to === 3 ? 72 : -72
-        const cx = mx + bend
-        const cy = my
-        const d = `M ${p1.x} ${p1.y} Q ${cx} ${cy} ${p2.x} ${p2.y}`
-        const lp = { x: cx, y: cy + (s.from === 2 ? -18 : 18) }
+        const bend = Math.abs(s.from - s.to) <= 1 ? 0 : s.from < s.to ? 56 : -56
+        const cx = mx + (p1.y === p2.y ? 0 : bend)
+        const cy = my + (p1.y === p2.y ? bend : 0)
+        const d =
+          bend === 0
+            ? `M ${p1.x} ${p1.y} L ${p2.x} ${p2.y}`
+            : `M ${p1.x} ${p1.y} Q ${cx} ${cy} ${p2.x} ${p2.y}`
+        const lp = { x: cx, y: cy - 14 }
         return (
           <g key={`dum-${s.from}-${s.to}-${idx}`}>
             <path
@@ -110,7 +118,7 @@ export function ClassicAoA8Diagram({ result }: Props) {
               strokeWidth={1.6}
               strokeDasharray="7 5"
               strokeLinecap="round"
-              markerEnd="url(#aoa8-norm)"
+              markerEnd="url(#aoa-norm)"
             />
             <text
               x={lp.x}
@@ -127,10 +135,12 @@ export function ClassicAoA8Diagram({ result }: Props) {
         )
       })}
 
-      {AO_A8_SEGMENTS.filter((s) => s.kind === "activity").map((s, idx) => {
-        const p1 = pt(s.from)
-        const p2 = pt(s.to)
-        const crit = isCritAct(result, s.code)
+      {segments
+        .filter((s): s is Extract<AoASegment, { kind: "activity" }> => s.kind === "activity")
+        .map((s, idx) => {
+          const p1 = pt(s.from)
+          const p2 = pt(s.to)
+          const crit = isCritAct(result, s.code)
           const stroke = crit ? CRIT : NORM
           const a = edgePoint(p1, p2, "from", EVT_R)
           const b = edgePoint(p1, p2, "to", EVT_R)
@@ -145,7 +155,7 @@ export function ClassicAoA8Diagram({ result }: Props) {
                 stroke={stroke}
                 strokeWidth={crit ? 2.35 : 1.45}
                 strokeLinecap="round"
-                markerEnd={crit ? "url(#aoa8-crit)" : "url(#aoa8-norm)"}
+                markerEnd={crit ? "url(#aoa-crit)" : "url(#aoa-norm)"}
               />
               <text
                 x={lp.x}
@@ -160,11 +170,13 @@ export function ClassicAoA8Diagram({ result }: Props) {
               </text>
             </g>
           )
-      })}
+        })}
 
-      {Array.from({ length: 8 }, (_, i) => i + 1).map((n) => {
+      {Array.from({ length: maxEv }, (_, i) => i + 1).map((n) => {
         const c = pt(n)
         const t = Te[n] ?? 0
+        const isStart = n === 1
+        const isEnd = n === maxEv
         return (
           <g key={`ev-${n}`}>
             <circle
@@ -172,8 +184,8 @@ export function ClassicAoA8Diagram({ result }: Props) {
               cy={c.y}
               r={EVT_R}
               fill="#fff"
-              stroke={n === 1 || n === 8 ? "#0f766e" : "#262626"}
-              strokeWidth={n === 1 || n === 8 ? 2.4 : 2}
+              stroke={isStart || isEnd ? "#0f766e" : "#262626"}
+              strokeWidth={isStart || isEnd ? 2.4 : 2}
             />
             <text
               x={c.x}
@@ -196,7 +208,7 @@ export function ClassicAoA8Diagram({ result }: Props) {
             >
               {formatSem(t)} sem
             </text>
-            {(n === 1 || n === 8) && (
+            {(isStart || isEnd) && (
               <text
                 x={c.x}
                 y={c.y - EVT_R - 6}
@@ -206,7 +218,7 @@ export function ClassicAoA8Diagram({ result }: Props) {
                 fill="#0f766e"
                 fontFamily="system-ui, sans-serif"
               >
-                {n === 1 ? "INICIO" : "FIN"}
+                {isStart ? "INICIO" : "FIN"}
               </text>
             )}
           </g>
