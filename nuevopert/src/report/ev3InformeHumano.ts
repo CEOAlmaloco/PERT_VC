@@ -39,11 +39,11 @@ Ejemplo: no decimos solo “programar”; decimos “API de reportes funcionando
 | Nivel | Nombre | Ejemplo |
 |-------|--------|---------|
 | 0 | Proyecto | SIGPI completo |
-| 1 | Paquete grande | Gestión · Módulo C · Módulo A · Módulo B |
-| 2 | Subpaquete | 1.1, 2.1, 3.2… (cada fila de las tablas de abajo) |
-| Detalle | Entregables del subpaquete | Lista de lo que debe quedar hecho (wireframes, app, etc.) |
+| 1 | Paquete grande | Gestión del Proyecto · Módulo C · Módulo A · Módulo B |
+| 2 | Entregable | 1.1 Planificación · 2.2 Aplicación ciudadana · 3.2 Visor GIS · 4.2 Hub e integraciones |
+| 3 | Actividad | A, B, C… dentro de cada entregable |
 
-**No hace falta llegar a 6 niveles** en todos los paquetes. En SIGPI basta con desglosar hasta **subpaquete (2.x)** y describir entregables; el **cronograma** usa letras A, B, C… (pestaña PERT → E1, E2, E3, E4).
+En SIGPI trabajamos con **4 paquetes, 14 entregables y actividades**. La EDT explica qué queda listo; el cronograma usa letras A, B, C… dentro de cada entregable.
 
 **Relación EDT ↔ PERT:**  
 - EDT = el menú completo de lo que hay que entregar.  
@@ -113,67 +113,63 @@ export const EV3_EDT_P1 = `### PAQUETE 1 — Gestión y administración
 
 | Código | Qué incluye | Entregables principales |
 |--------|-------------|------------------------|
-| 1.1 | Inicio | Plan del proyecto, acta de inicio, cronograma base |
-| 1.2 | Contrato y legal | Contrato firmado, cumplimiento de bases |
-| 1.3 | Calidad | Plan de calidad, listas de revisión |
-| 1.4 | Riesgos | Matriz de riesgos y qué hacer si pasa algo |
-| 1.5 | Comunicaciones | Informes de avance a la municipalidad |
-| 1.6 | Capacitación | Talleres para que la gente use el sistema |
+| 1.1 | Planificación | Acta de constitución, plan del proyecto, cronograma base y kick-off |
+| 1.2 | Gestión de riesgos | Registro de riesgos, mitigación y seguimiento periódico |
+| 1.3 | Cierre | Materiales de capacitación, talleres, adopción e informe final |
 
-**Cronograma:** pestaña PERT → **E1 Gestión** (actividades A–F).`
+**Cronograma:** pestaña PERT → **E1.1**, **E1.2** y **E1.3** (actividades A–D por entregable).`
 
 export const EV3_EDT_P2 = `### PAQUETE 2 — Módulo C: Valle Alerta Ciudadana
 
 | Código | Qué incluye | Entregables principales |
 |--------|-------------|------------------------|
-| 2.1 | Diseño | Requisitos, bocetos, prototipo aprobado |
-| 2.2 | App ciudadana | App/PWA con mapa, foto y reporte (funciona con poca señal) |
-| 2.3 | Backend | Servidor que recibe y valida reportes |
-| 2.4 | Alertas | SMS y avisos cuando hay riesgo |
-| 2.5 | Panel municipal | Pantalla para validar reportes de vecinos |
-| 2.6 | Pruebas y salida | Pruebas con usuarios reales y puesta en marcha piloto |
+| 2.1 | Diseño y prototipo | Requisitos, wireframes, prototipo navegable y validado |
+| 2.2 | Aplicación ciudadana | PWA offline-first, geolocalización, cámara y sincronización |
+| 2.3 | Backend y alertas | API REST, validación, Twilio, FCM y panel de moderación |
+| 2.4 | Pruebas y despliegue | Pruebas funcionales, UAT y despliegue cloud |
 
-**Cronograma:** pestaña PERT → **E2 Módulo C**.`
+**Cronograma:** pestaña PERT → **E2.1**, **E2.2**, **E2.3** y **E2.4**.`
 
 export const EV3_EDT_P3 = `### PAQUETE 3 — Módulo A: Valle Situación
 
 | Código | Qué incluye | Entregables principales |
 |--------|-------------|------------------------|
-| 3.1 | Diseño | Requisitos del tablero y mapas |
-| 3.2 | Mapa GIS | Mapa en vivo con focos y brigadas |
-| 3.3 | Dashboard | Panel para la sala de crisis (KPI, estado) |
-| 3.4 | App brigadas | App para personal en terreno |
-| 3.5 | Sala de crisis | Equipos y conexión de la sala |
-| 3.6 | Pruebas y salida | Pruebas con brigadas y go-live Fase 1 |
+| 3.1 | Diseño y prototipo | Requisitos GIS, flujos operativos, interfaz y validación |
+| 3.2 | Visor GIS y dashboard | Mapa PostGIS/Leaflet, focos, brigadas y KPIs |
+| 3.3 | App brigadas | App offline, sincronización GPS y sala de crisis |
+| 3.4 | Pruebas y despliegue | Carga, failover, UAT y producción |
 
-**Cronograma:** pestaña PERT → **E3 Módulo A**.`
+**Cronograma:** pestaña PERT → **E3.1**, **E3.2**, **E3.3** y **E3.4**.`
 
 export const EV3_EDT_P4 = `### PAQUETE 4 — Módulo B: Valle Nexo
 
 | Código | Qué incluye | Entregables principales |
 |--------|-------------|------------------------|
-| 4.1 | Diseño | Modelo de datos e integraciones |
-| 4.2 | Hub de datos | Histórico y consultas rápidas |
-| 4.3 | APIs externas | Conexión CONAF, Bomberos, SENAPRED |
-| 4.4 | Reportes | Análisis y reportes para autoridades |
-| 4.5 | Seguridad | Protección de datos y auditoría |
-| 4.6 | Cierre Fase 2 | Pruebas finales y entrega |
+| 4.1 | Diseño y modelo de datos | Base relacional, separación de BD y arquitectura de APIs |
+| 4.2 | Hub e integraciones | ETL, endpoints CONAF/Bomberos/SENAPRED, analítica y seguridad |
+| 4.3 | Pruebas y despliegue | Integración externa, seguridad, corrección y producción |
 
-**Cronograma:** pestaña PERT → **E4 Módulo B** (después de terminar C y A en piloto).`
+**Cronograma:** pestaña PERT → **E4.1**, **E4.2** y **E4.3** (después del piloto C + A).`
 
 export const EV3_EDT_INTRO_ARBOL = `## Vista general del proyecto
 
 **Nivel 0:** SIGPI — Sistema Integrado de Gestión y Prevención de Incendios
 
 **Nivel 1 — Cuatro paquetes:**
-1. Gestión y administración  
-2. Módulo C (Valle Alerta Ciudadana)  
-3. Módulo A (Valle Situación)  
-4. Módulo B (Valle Nexo)
+1. Gestión del Proyecto  
+2. Módulo C: Valle Alerta Ciudadana  
+3. Módulo A: Valle Situación  
+4. Módulo B: Valle Nexo
+
+**Nivel 2 — Catorce entregables:**
+- 1.1 Planificación · 1.2 Gestión de riesgos · 1.3 Cierre
+- 2.1 Diseño y prototipo · 2.2 Aplicación ciudadana · 2.3 Backend y alertas · 2.4 Pruebas y despliegue
+- 3.1 Diseño y prototipo · 3.2 Visor GIS y dashboard · 3.3 App brigadas · 3.4 Pruebas y despliegue
+- 4.1 Diseño y modelo de datos · 4.2 Hub e integraciones · 4.3 Pruebas y despliegue
 
 **Fases:** Fase 1 = paquetes 1 + 2 + 3 (piloto antes del verano). Fase 2 = paquete 4.
 
-Árbol editable en pestaña **EDT visual**. Tablas detalladas en los bloques siguientes.`
+Árbol editable en pestaña **EDT visual**. Las actividades A, B, C… se ven y estiman en la pestaña **PERT**.`
 
 export const EV3_SECUENCIA = `## 2. Orden de trabajo y dependencias
 

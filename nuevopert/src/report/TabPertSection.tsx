@@ -74,8 +74,8 @@ export function TabPertSection({
 }: Props) {
   const [rows, setRows] = useState<Row[]>(() => cloneRows(initialRows))
   const [committedRows, setCommittedRows] = useState<Row[]>(() => cloneRows(initialRows))
-  const [activeTemplateId, setActiveTemplateId] = useState<string | null>("e1")
-  const [ganttPhase, setGanttPhase] = useState("Entregable 1 — Gestión")
+  const [activeTemplateId, setActiveTemplateId] = useState<string | null>(SIGPI_CRONOGRAMA_TEMPLATES[0]?.id ?? null)
+  const [ganttPhase, setGanttPhase] = useState(SIGPI_CRONOGRAMA_TEMPLATES[0]?.ganttPhase ?? "Entregable 1.1 — Planificación")
   const [highlightZ, setHighlightZ] = useState<number | null>(null)
 
   const result = useMemo(() => computeCpmFromRows(committedRows), [committedRows])
@@ -181,13 +181,7 @@ export function TabPertSection({
             key={t.id}
             type="button"
             title={t.description}
-            style={
-              activeTemplateId === t.id
-                ? { ...btnPrimary, marginTop: 6 }
-                : t.id === "e1" || t.id === "e2" || t.id === "e3" || t.id === "e4"
-                  ? { ...btnEntregable, marginTop: 6 }
-                  : { ...btn, marginTop: 6 }
-            }
+            style={activeTemplateId === t.id ? { ...btnPrimary, marginTop: 6 } : { ...btnEntregable, marginTop: 6 }}
             onClick={() => loadSigpiTemplate(t)}
           >
             {t.label}

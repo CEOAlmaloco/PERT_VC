@@ -31,7 +31,7 @@ export function EdtWbsEditor({ root, onChange }: Props) {
       }}
     >
       <p style={{ margin: "0 0 20px", fontSize: 12, color: colors.muted, textAlign: "center" }}>
-        EDT — Producto resultado → entregables → paquetes / actividades (editable)
+        EDT — Producto resultado → paquetes → entregables / actividades (editable)
       </p>
 
       {/* Raíz */}
