@@ -69,29 +69,34 @@ export function defaultReportData(): ReportData {
     projectSubtitle: "Caso 6 · GPY1102 · Gestión de Proyectos de Software · Enfoque Ágil Scrum",
     courseCode: "GPY1102",
     courseName: "Gestión de Proyectos de Software",
-    team: "Equipo Scrum — Product Owner · Scrum Master · Development Team",
+    team: "Ariel Molina (PO) · Christian Mesa (SM) · Alex Ampuero (Dev / GP)",
     teacher: "Gabriela Soledad Ruiz Acevedo",
     organization: "Municipalidad de la Región del Biobío",
     documentDate: "24 de agosto de 2026",
-    documentVersion: "Acta v1.0 · Plan preliminar",
+    documentVersion: "Acta v2.0 · Plan preliminar",
     teamRole: "Equipo de proyecto público-social ejecutando bajo marco Scrum (piloto municipal)",
     roleNote:
-      "Somos un proyecto público-social. El equipo aplica Scrum: Product Owner, Scrum Master y Development Team. El cliente es la municipalidad (representada académicamente por la docente).",
+      "Somos un proyecto público-social. Roles Scrum: Product Owner = Ariel Nicolás Exequiel Molina Milanca; Scrum Master = Christian Leonardo Jesús Mesa Gaete; Development Team / Gerente de Proyecto = Alex Ignacio Ampuero Ahumada. El cliente es la municipalidad (representada académicamente por la docente).",
     closingQuote:
-      "No se trata solo de sensores: se trata de pasar de un mantenimiento reactivo a uno preventivo y trazable.",
+      "No se trata solo de sensores: se trata de pasar de un mantenimiento reactivo a uno preventivo y trazable — y que los inspectores realmente lo usen.",
     ficha: [
       { label: "Asignatura", value: "GPY1102 – Gestión de Proyectos de Software" },
-      { label: "Equipo", value: "PO · Scrum Master · Development Team (completar nombres)" },
+      {
+        label: "Equipo",
+        value:
+          "PO: Ariel Molina · SM: Christian Mesa · Dev/GP: Alex Ampuero",
+      },
       { label: "Docente", value: "Gabriela Soledad Ruiz Acevedo" },
       { label: "Organización", value: "Municipalidad — Región del Biobío" },
       {
         label: "Proyecto",
         value: "Sistema de Monitoreo y Gestión de Mantenimiento de Puentes (Caso 6)",
       },
-      { label: "Versión", value: "Acta v1.0 — Agosto 2026" },
+      { label: "Versión", value: "Acta v2.0 — Agosto 2026" },
       { label: "Metodología", value: "Ágil — Scrum (sprints de 2 semanas)" },
       { label: "Presupuesto", value: "$50.000.000 – $100.000.000 CLP (techo $100M)" },
       { label: "Plazo", value: "≤ 12 meses" },
+      { label: "Patrocinador principal", value: "Alcalde / Alcaldía (GORE = cofinanciador)" },
     ],
     kpiStats: [
       {
@@ -227,7 +232,7 @@ export function defaultReportData(): ReportData {
       entrevistas:
         "Aclaraciones cliente (docente): presupuesto mínimo $50M / máximo $100M · tiempo 1 año o menos · proyecto público-social · supuesto de digitalización si no se indica lo contrario.",
       consideraciones:
-        "Roles Scrum: Product Owner (valor/backlog), Scrum Master (proceso/impedimentos), Development Team (entrega técnica). Decisiones de alcance del piloto las prioriza el PO dentro del Acta.",
+        "Roles Scrum: PO = Ariel Molina; SM = Christian Mesa; Dev/GP = Alex Ampuero. GORE es cofinanciador, no patrocinador principal. Objetivo de Calidad incluye adopción real por inspectores (no solo entrega técnica).",
     },
     factibilidad: {
       tecnica:
@@ -243,7 +248,7 @@ export function defaultReportData(): ReportData {
       foda:
         "F: alcance MVP claro. O: escalar a más puentes tras piloto; convenios universidad/ingeniería. D: hardware en vía pública. A: retrasos de permisos y sobrecosto de conectividad.",
       kpis:
-        "2 puentes operativos · 5 módulos en producción · marcha blanca con usuarios municipales · presupuesto ≤$100M · plazo ≤12 meses · desviación <5%.",
+        "2 puentes operativos · 5 módulos en producción · marcha blanca con uso real de inspectores · presupuesto ≤$100M · plazo ≤12 meses · desviación <5% · ≥95% alertas válidas.",
     },
     edtRoot: {
       id: "root",

@@ -35,9 +35,9 @@ Tipo: Proyecto público-social (piloto)`,
       "meta-correccion-rol",
       "Rol del equipo (Scrum)",
       "Tres roles del equipo de trabajo.",
-      `Product Owner: prioriza Product Backlog, valida incrementos y representa valor municipal.
-Scrum Master: facilita ceremonias, elimina impedimentos y cuida el proceso.
-Development Team: diseña, desarrolla, prueba e integra software + captura de mediciones.
+      `Product Owner: Ariel Nicolás Exequiel Molina Milanca — prioriza Product Backlog, valida entregas y representa valor municipal.
+Scrum Master: Christian Leonardo Jesús Mesa Gaete — facilita ceremonias, elimina impedimentos y cuida el proceso.
+Development Team / Gerente de Proyecto: Alex Ignacio Ampuero Ahumada — diseña, desarrolla, prueba e integra; representa al equipo ante el cliente.
 
 Somos un proyecto público-social. No es un SaaS comercial predictivo: es un piloto acotado a 2 puentes y 3 mediciones.`,
       "identificacion",
