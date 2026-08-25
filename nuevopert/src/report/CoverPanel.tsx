@@ -45,9 +45,9 @@ export function CoverPanel({ data, onFichaChange }: Props) {
           marginBottom: 24,
         }}
       >
-        <strong style={{ color: colors.orange }}>Problema de fondo:</strong> el problema no es el incendio — es llegar
-        tarde a la información del incendio. SIGPI centraliza reporte, mapa operativo y coordinación con trazabilidad
-        legal.
+        <strong style={{ color: colors.orange }}>Problema de fondo:</strong> el mantenimiento es reactivo y la
+        información está dispersa. El piloto de puentes centraliza mediciones, alertas y planificación con
+        trazabilidad para priorizar intervenciones a tiempo.
       </p>
 
       <StatCards stats={data.kpiStats} title="Indicadores críticos del caso" />

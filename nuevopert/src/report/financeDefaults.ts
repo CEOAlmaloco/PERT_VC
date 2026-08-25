@@ -5,34 +5,36 @@ import {
   type FinanceInputs,
 } from "../finance/cashFlow"
 
+/** Presupuesto techo Caso 6: $100M CLP (rango $50–100M), proyecto público-social */
 const DRIVER_DEFAULTS = {
   periods: 5,
-  discountRate: 0.16,
+  discountRate: 0.12,
   taxRate: 0.27,
   withLoan: false,
   autoSync: true,
-  revenues: [0, 45_000_000, 50_000_000, 55_000_000, 60_000_000],
-  variableCosts: [0, -12_000_000, -13_000_000, -14_000_000, -15_000_000],
-  fixedCosts: [0, -8_000_000, -8_500_000, -9_000_000, -9_500_000],
-  equipment: { cost: 80_000_000, residual: 0, lifeYears: 5 },
-  furniture: { cost: 25_000_000, residual: 0, lifeYears: 5 },
-  intangible: { cost: 10_000_000, lifeYears: 5 },
+  // Aporte/beneficio social modelado como “ingresos” de valor público (fondos ya asignados)
+  revenues: [0, 20_000_000, 22_000_000, 24_000_000, 25_000_000],
+  variableCosts: [0, -6_000_000, -6_500_000, -7_000_000, -7_500_000],
+  fixedCosts: [0, -5_000_000, -5_000_000, -5_500_000, -5_500_000],
+  equipment: { cost: 35_000_000, residual: 5_000_000, lifeYears: 5 }, // sensores/instalación
+  furniture: { cost: 8_000_000, residual: 0, lifeYears: 5 }, // hosting/infra
+  intangible: { cost: 40_000_000, lifeYears: 5 }, // desarrollo software Scrum
   period0: {
-    investEquipment: -80_000_000,
-    investFurniture: -25_000_000,
-    workingCapital: -10_000_000,
+    investEquipment: -35_000_000,
+    investFurniture: -8_000_000,
+    workingCapital: -7_000_000,
   },
   loan: {
-    principal: 48_000_000,
-    periodRate: 0.012,
+    principal: 0,
+    periodRate: 0.01,
     periods: 5,
   },
 }
 
 function baseFinance(partial: Partial<FinanceInputs>): FinanceInputs {
   const merged: FinanceInputs = {
-    projectName: "SIGPI — Municipalidad Valle del Sol",
-    organization: "Municipalidad Valle del Sol",
+    projectName: "Monitoreo de puentes — Municipalidad Biobío (Caso 6)",
+    organization: "Municipalidad Región del Biobío",
     lines: [],
     ...DRIVER_DEFAULTS,
     ...partial,
@@ -40,11 +42,11 @@ function baseFinance(partial: Partial<FinanceInputs>): FinanceInputs {
   return syncFinanceFromParams(merged)
 }
 
-/** Plantilla SIGPI con datos de ejemplo (2.5.4 / 2.5.5) */
+/** Plantilla financiera del piloto de puentes (techo ~$100M) */
 export function defaultFinanceInputs(): FinanceInputs {
   return baseFinance({
-    projectName: "SIGPI — Municipalidad Valle del Sol",
-    organization: "Municipalidad Valle del Sol",
+    projectName: "Monitoreo de puentes — Municipalidad Biobío (Caso 6)",
+    organization: "Municipalidad Región del Biobío",
     withLoan: false,
   })
 }

@@ -521,48 +521,39 @@ function pertRow(
 }
 
 /**
- * PERT por entregable EDT (Paquetes 1–4) — formato pedido en evaluación GPY1101:
- * un bloque de cronograma por cada entregable principal.
+ * PERT por entregable EDT (Paquetes 1–4) — Caso 6 Monitoreo de puentes Biobío.
  */
 export function sigpiEntregablesRows(): Row[] {
   return [
-    pertRow("ent-a", "A", "Entregable 1 — Gestión y administración", "-", 6, 10, 14),
-    pertRow("ent-b", "B", "Entregable 2 — Módulo C (Valle Alerta Ciudadana)", "A", 18, 24, 32),
-    pertRow("ent-c", "C", "Entregable 3 — Módulo A (Valle Situación)", "A", 17, 23, 31),
-    pertRow("ent-d", "D", "Entregable 4 — Módulo B (Valle Nexo)", "B;C", 19, 26, 34),
+    pertRow("ent-a", "A", "Entregable 1 — Gestión Scrum y constitución", "-", 6, 10, 14),
+    pertRow("ent-b", "B", "Entregable 2 — Software core (Registro + Captura)", "A", 16, 22, 30),
+    pertRow("ent-c", "C", "Entregable 3 — Alertas, panel y mantenimiento", "B", 16, 22, 30),
+    pertRow("ent-d", "D", "Entregable 4 — Hardware, marcha blanca y cierre", "C", 14, 20, 28),
   ]
 }
 
-/** Red PERT detallada (subpaquetes / fases) — opcional */
+/** Red PERT detallada del piloto de puentes (opcional) */
 export function sigpiValleDelSolRows(): Row[] {
   return [
-    // —— Fase 0 / 1: licitación y módulos C + A ——
-    pertRow("sigpi-a1", "A1", "Licitación y contrato", "-", 6, 8, 14),
-    pertRow("sigpi-a2", "A2", "Análisis requisitos módulo C", "A1", 2, 3, 5),
-    pertRow("sigpi-a3", "A3", "Análisis requisitos módulo A", "A1", 2, 3, 5),
-    pertRow("sigpi-a8", "A8", "Infraestructura cloud inicial", "A1", 2, 3, 5),
-    pertRow("sigpi-a4", "A4", "Diseño UX/UI C+A", "A2;A3", 3, 4, 6),
-    pertRow("sigpi-a5", "A5", "Backend API reportes", "A4", 4, 5, 9),
-    pertRow("sigpi-a6", "A6", "PWA ciudadana (módulo C)", "A4;A5", 4, 6, 9),
-    pertRow("sigpi-a7", "A7", "Motor alertas SMS", "A5", 3, 4, 6),
-    pertRow("sigpi-a9", "A9", "Visor GIS (módulo A)", "A3;A4", 5, 7, 12),
-    pertRow("sigpi-a11", "A11", "App brigadas móvil", "A9", 3, 4, 6),
-    pertRow("sigpi-a10", "A10", "Dashboard operativo PMU", "A7;A9", 4, 5, 7),
-    pertRow("sigpi-a12", "A12", "Integración C↔A", "A6;A10;A11", 2, 3, 5),
-    pertRow("sigpi-a13", "A13", "UAT Fase 1", "A12", 2, 3, 5),
-    pertRow("sigpi-a14", "A14", "Despliegue piloto pre-verano", "A13", 1, 2, 4),
-    pertRow("sigpi-a15", "A15", "Evaluación piloto Fase 1", "A14", 1, 2, 4),
-    // —— Fase 2: módulo B (Valle Nexo) ——
-    pertRow("sigpi-b1", "B1", "Análisis y diseño módulo B", "A15", 2, 3, 5),
-    pertRow("sigpi-b2", "B2", "Hub datos e histórico", "B1", 6, 8, 11),
-    pertRow("sigpi-b3", "B3", "API integración externa", "B2", 4, 5, 8),
-    pertRow("sigpi-b4", "B4", "Analítica y reportes", "B3", 3, 4, 6),
-    pertRow("sigpi-b5", "B5", "Testing y seguridad B", "B4", 2, 3, 5),
-    pertRow("sigpi-b6", "B6", "Despliegue Fase 2 / cierre", "B5", 2, 3, 5),
+    pertRow("pb-a1", "A1", "Acta y kickoff Scrum", "-", 2, 3, 4),
+    pertRow("pb-a2", "A2", "Product Backlog priorizado", "A1", 2, 3, 4),
+    pertRow("pb-a3", "A3", "Diseño módulo Registro", "A2", 3, 4, 6),
+    pertRow("pb-a4", "A4", "Diseño módulo Captura", "A2", 3, 4, 6),
+    pertRow("pb-a5", "A5", "Desarrollo Registro", "A3", 4, 6, 8),
+    pertRow("pb-a6", "A6", "Desarrollo Captura + inspecciones", "A4;A5", 5, 7, 10),
+    pertRow("pb-a7", "A7", "Release Foundation (UAT)", "A6", 2, 3, 4),
+    pertRow("pb-a8", "A8", "Motor de reglas de alerta", "A7", 4, 5, 7),
+    pertRow("pb-a9", "A9", "Panel de monitoreo", "A8", 4, 5, 7),
+    pertRow("pb-a10", "A10", "Planificación de mantenimiento", "A8", 4, 5, 7),
+    pertRow("pb-a11", "A11", "Release Alertas/Panel", "A9;A10", 2, 3, 4),
+    pertRow("pb-a12", "A12", "Instalación sensores 2 puentes", "A11", 3, 5, 7),
+    pertRow("pb-a13", "A13", "Integración hardware–software", "A12", 3, 4, 6),
+    pertRow("pb-a14", "A14", "Marcha blanca y capacitación", "A13", 3, 4, 6),
+    pertRow("pb-a15", "A15", "Ajuste umbrales y cierre/traspaso", "A14", 2, 3, 5),
   ]
 }
 
-/** Ejemplo didáctico A–H (curso); no es el caso SIGPI */
+/** Ejemplo didáctico A–H (curso); no es el caso de puentes */
 export function exampleClassicAHRows(): Row[] {
   return [
     pertRow("1", "A", "Obra / ingeniería", "-", 4, 6, 9),

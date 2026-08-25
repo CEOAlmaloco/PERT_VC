@@ -5,7 +5,7 @@ import { EV3_HUMAN_BLOCK_IDS } from "./ev3InformeHumano"
 import { normalizeFinance } from "./financeDefaults"
 import type { DocumentBlock, ReportData } from "./types"
 
-const STORAGE_KEY = "gpy1101-sigpi-report-v15"
+const STORAGE_KEY = "gpy1102-puentes-biobio-report-v1"
 
 function mergeBlocks(saved: Partial<ReportData>, base: DocumentBlock[]): DocumentBlock[] {
   if (!saved.documentBlocks?.length) return base

@@ -103,7 +103,7 @@ const POS_SUMMARY: Record<number, { x: number; y: number }> = {
 export const SIGPI_AOA_TOPOLOGIES: AoATopology[] = [
   {
     id: "e1",
-    title: "Entregable 1 — Gestión (AoA)",
+    title: "Entregable 1 — Gestión Scrum (AoA)",
     eventCount: 8,
     eventPos: POS_8_PARALLEL,
     segments: E1_SEGMENTS,
@@ -111,7 +111,7 @@ export const SIGPI_AOA_TOPOLOGIES: AoATopology[] = [
   },
   {
     id: "e2",
-    title: "Entregable 2 — Módulo C (AoA)",
+    title: "Entregable 2 — Software core Registro+Captura (AoA)",
     eventCount: 8,
     eventPos: POS_8_PARALLEL,
     segments: E2_SEGMENTS,
@@ -119,7 +119,7 @@ export const SIGPI_AOA_TOPOLOGIES: AoATopology[] = [
   },
   {
     id: "e3",
-    title: "Entregable 3 — Módulo A (AoA)",
+    title: "Entregable 3 — Alertas / Panel / Mantenimiento (AoA)",
     eventCount: 8,
     eventPos: POS_8_PARALLEL,
     segments: E3_SEGMENTS,
@@ -127,7 +127,7 @@ export const SIGPI_AOA_TOPOLOGIES: AoATopology[] = [
   },
   {
     id: "e4",
-    title: "Entregable 4 — Módulo B (AoA)",
+    title: "Entregable 4 — Hardware / Marcha blanca / Cierre (AoA)",
     eventCount: 8,
     eventPos: POS_8_LINE,
     segments: E4_SEGMENTS,
@@ -135,7 +135,7 @@ export const SIGPI_AOA_TOPOLOGIES: AoATopology[] = [
   },
   {
     id: "summary",
-    title: "Resumen 4 entregables (AoA)",
+    title: "Resumen 4 entregables piloto puentes (AoA)",
     eventCount: 6,
     eventPos: POS_SUMMARY,
     segments: SUMMARY_SEGMENTS_OK,

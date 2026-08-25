@@ -48,7 +48,7 @@ export type KpiStat = {
 }
 
 export type SigpiModule = {
-  code: "A" | "B" | "C"
+  code: string
   name: string
   summary: string
   duration: string

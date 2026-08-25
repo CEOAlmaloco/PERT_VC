@@ -4,9 +4,12 @@ import { badge, card, colors } from "./theme"
 type Props = { modules: SigpiModule[]; flowAsIs?: string; flowToBe?: string }
 
 const CODE_COLOR: Record<string, string> = {
-  C: "#ea580c",
-  A: "#1e4d8c",
-  B: "#059669",
+  R: "#1e4d8c",
+  C: "#0d9488",
+  A: "#ea580c",
+  P: "#7c3aed",
+  M: "#059669",
+  B: "#64748b",
 }
 
 export function ModuleCards({ modules, flowAsIs, flowToBe }: Props) {
@@ -68,7 +71,7 @@ export function ModuleCards({ modules, flowAsIs, flowToBe }: Props) {
           )}
           {flowToBe && (
             <div style={{ ...card, background: "#ecfdf5", borderColor: "#a7f3d0" }}>
-              <h4 style={{ margin: "0 0 8px", fontSize: 13, color: colors.success }}>TO-BE (SIGPI)</h4>
+              <h4 style={{ margin: "0 0 8px", fontSize: 13, color: colors.success }}>TO-BE (piloto puentes)</h4>
               <p style={{ margin: 0, fontSize: 12, lineHeight: 1.55, color: colors.text }}>{flowToBe}</p>
             </div>
           )}
@@ -76,7 +79,8 @@ export function ModuleCards({ modules, flowAsIs, flowToBe }: Props) {
       )}
 
       <p style={{ marginTop: 16, fontSize: 12, color: colors.muted, fontStyle: "italic" }}>
-        A, B y C son partes de un mismo sistema integrado — no tres compras distintas. Fase 1: C + A · Fase 2: B.
+        R, C, A, P y M son módulos de un mismo piloto integrado (2 puentes). No incluyen algoritmos predictivos
+        avanzados.
       </p>
     </div>
   )

@@ -1,7 +1,8 @@
 {
-  "name": "nuevopert",
+  "name": "pert-puentes-biobio",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "PERT/CPM y plan del Caso 6 — Monitoreo de puentes municipales Biobío (GPY1102 / Scrum)",
   "type": "module",
   "scripts": {
     "dev": "vite",
